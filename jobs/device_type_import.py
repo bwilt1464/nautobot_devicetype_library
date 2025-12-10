@@ -203,7 +203,8 @@ class SyncDeviceTypes(Job):
                 process_component("console-server-ports", ConsoleServerPortTemplate, ["name", "type", "label", "description"])
                 # PowerPortTemplate disabled due to power_factor constraint issues
                 # process_component("power-ports", PowerPortTemplate, ["name", "type", "maximum_draw", "allocated_draw", "power_factor"], defaults={"power_factor": 1.0})
-                process_component("power-outlets", PowerOutletTemplate, ["name", "type", "power_port", "feed_leg", "label", "description"])
+                # Removed "power_port" from "power-outlets" due to "power-ports" template being disabled
+                process_component("power-outlets", PowerOutletTemplate, ["name", "type", "feed_leg", "label", "description"])
                 process_component("front-ports", FrontPortTemplate, ["name", "type", "rear_port", "rear_port_position", "label", "description"])
                 process_component("rear-ports", RearPortTemplate, ["name", "type", "positions", "label", "description"])
                 # process_component("module-bays", ModuleBay, ["name", "position"], fk_field="name", parent_field="device_type_id", parent_value=device_type.id)
@@ -630,3 +631,4 @@ class SyncDeviceTypes(Job):
 
 # Register the job explicitly
 register_jobs(SyncDeviceTypes)
+
